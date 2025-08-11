@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Enums\User\UserRole;
@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\User\UserResource;
-use App\Http\Auth\Requests\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\VerifyEmailRequest;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use App\Http\Requests\Auth\ReSendVerificationCodeRequest;
@@ -151,9 +151,9 @@ class AuthController extends Controller
             }
 
             $tokenName = 'auth_token_' . now()->timestamp;
+            $user->tokens()->delete();
             $token = $user->createToken($tokenName)->plainTextToken;
 
-            $user->tokens()->delete();
 
             Log::info('User logged in successfully', [
                 'user_id' => $user->id,
