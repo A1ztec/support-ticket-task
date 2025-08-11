@@ -130,8 +130,6 @@ class AuthController extends Controller
         try {
             $data = $request->validated();
 
-
-
             $user = User::where('email', $data['email'])->first();
 
             if (!$user) {
@@ -151,7 +149,7 @@ class AuthController extends Controller
             }
 
             $tokenName = 'auth_token_' . now()->timestamp;
-            $user->tokens()->delete();
+            //$user->tokens()->delete();
             $token = $user->createToken($tokenName)->plainTextToken;
 
 
@@ -171,7 +169,6 @@ class AuthController extends Controller
             );
         } catch (\Exception $e) {
             Log::error('Login failed: ' . $e->getMessage(), [
-                'identifier' => $data['identifier'],
                 'request_ip' => request()->ip()
             ]);
             return $this->errorResponse(__('Login failed. Please try again.'));
