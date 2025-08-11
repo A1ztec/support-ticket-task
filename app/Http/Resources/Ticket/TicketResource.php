@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\Message\MessageResource;
+use App\Http\Resources\User\SimpleUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Message\SimpleMessageResource;
 
@@ -25,7 +26,7 @@ class TicketResource extends JsonResource
             'message' => $this->message,
             'attachment' => $this->attachment ? asset('storage/' . $this->attachment) : null,
             'status' => $this->status,
-            'user' => UserResource::make($this->whenLoaded('user')) ?? null,
+            'user' => SimpleUserResource::make($this->whenLoaded('user')) ?? null,
             'messages' => SimpleMessageResource::collection($this->whenLoaded('messages')) ?? null,
         ];
     }
