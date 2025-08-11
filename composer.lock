@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c91e30b95c851b7f276ced2f690975a",
+    "content-hash": "17068ac60ff169304a99eeddcc6d00b9",
     "packages": [
         {
             "name": "brick/math",
@@ -2068,6 +2068,50 @@
                 }
             ],
             "time": "2024-12-08T08:18:47+00:00"
+        },
+        {
+            "name": "manadinho/lara-translate",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/manadinho/lara-translate.git",
+                "reference": "a6327deed328656eb93cd5ebee1a9bea8f0aeb8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/manadinho/lara-translate/zipball/a6327deed328656eb93cd5ebee1a9bea8f0aeb8b",
+                "reference": "a6327deed328656eb93cd5ebee1a9bea8f0aeb8b",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Manadinho\\LaraTranslate\\LaraTranslateServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Manadinho\\LaraTranslate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "muhammad imran",
+                    "email": "mimranisrar6@gmail.com"
+                }
+            ],
+            "description": "Use lara-translate to manage translations and translation of keys in one place",
+            "support": {
+                "issues": "https://github.com/manadinho/lara-translate/issues",
+                "source": "https://github.com/manadinho/lara-translate/tree/1.1.0"
+            },
+            "time": "2023-12-04T07:32:34+00:00"
         },
         {
             "name": "monolog/monolog",
