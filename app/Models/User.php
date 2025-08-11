@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\User\UserRole;
+use App\Events\UserRegistered;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -73,6 +74,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_otp_expires_at' => now()->addMinutes(10),
         ]);
 
-        //Mail::to($this->email)->queue(new SendEmailVerificationCode($this));
+        event(new UserRegistered($this, $this->verify_otp));
     }
 }
