@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Ticket\TicketResource;
 use App\Http\Requests\Api\CreateTicketRequest;
 use App\Http\Requests\Api\ReplyToTicketRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TicketController extends Controller
 {
-    use ApiResponseTrait;
+    use ApiResponseTrait, AuthorizesRequests;
 
     public function listTickets()
     {
@@ -44,7 +45,7 @@ class TicketController extends Controller
             ->with(['user', 'messages.user'])
             ->findOrFail($id);
 
-        $this->authorize('view', [$user, $ticket]);
+        $this->authorize('view', $ticket);
 
         return $this->successResponse(
             data: TicketResource::make($ticket),
