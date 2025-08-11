@@ -22,7 +22,7 @@ class ReplyToTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => ['required', 'string'],
+            'message' => ['required', 'string', 'max:2048'],
             'ticket_id' => ['required', 'exists:tickets,id']
         ];
     }
