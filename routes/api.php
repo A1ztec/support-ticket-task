@@ -19,8 +19,6 @@ Route::prefix('v1')->group(function () {
             Route::post('/register', 'register')->name('auth.register')->middleware('throttle:5,1');
             Route::post('/verification/resend', 'resendVerificationCode')->name('auth.verification.resend')->middleware('throttle:5,1');
             Route::post('/verification/verify', 'verifyEmail')->name('auth.verification.verify')->middleware('throttle:5,1');
-            Route::post('/password/reset/send', 'sendResetPasswordCode')->name('auth.password.reset.send')->middleware('throttle:5,1');
-            Route::post('/password/reset', 'resetPassword')->name('auth.password.reset')->middleware('throttle:5,1');
 
             Route::middleware('auth:sanctum')->group(function () {
                 Route::post('/logout', 'logout')->name('auth.logout');
