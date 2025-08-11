@@ -43,7 +43,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 }
 
                 if ($e instanceof ValidationException) {
-                    return $api->validationErrorResponse($e->errors(), __('Validation failed.'));
+                    return $api->validationErrorResponse($e->errors(), __('Validation error.'));
                 }
 
                 Log::error('Unexpected error: ' . $e->getMessage(), [
