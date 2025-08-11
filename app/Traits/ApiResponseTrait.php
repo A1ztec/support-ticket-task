@@ -10,7 +10,7 @@ trait ApiResponseTrait
     /**
      * Return success response
      */
-    protected function successResponse($data = null, string $message = 'Success', int $code = 200): JsonResponse
+    public function successResponse($data = null, string $message = 'Success', int $code = 200): JsonResponse
     {
         return response()->json([
             'status' => ApiStatus::SUCCESS->value,
@@ -23,7 +23,7 @@ trait ApiResponseTrait
     /**
      * Return error response
      */
-    protected function errorResponse(string $message = 'Error occurred', int $code = 500, $errors = null): JsonResponse
+    public function errorResponse(string $message = 'Error occurred', int $code = 500, $errors = null): JsonResponse
     {
         $response = [
             'status' => ApiStatus::ERROR->value,
@@ -41,7 +41,7 @@ trait ApiResponseTrait
     /**
      * Return validation error response
      */
-    protected function validationErrorResponse($errors, string $message = 'Validation failed'): JsonResponse
+    public function validationErrorResponse($errors, string $message = 'Validation failed'): JsonResponse
     {
         return response()->json([
             'status' => ApiStatus::VALIDATION_FAILED->value,
@@ -54,7 +54,7 @@ trait ApiResponseTrait
     /**
      * Return not found response
      */
-    protected function notFoundResponse(string $message = 'Resource not found'): JsonResponse
+    public function notFoundResponse(string $message = 'Resource not found'): JsonResponse
     {
         return response()->json([
             'status' => ApiStatus::NOT_FOUND->value,
@@ -66,7 +66,7 @@ trait ApiResponseTrait
     /**
      * Return unauthorized response
      */
-    protected function unauthorizedResponse(string $message = 'Unauthorized'): JsonResponse
+    public function unauthorizedResponse(string $message = 'Unauthorized'): JsonResponse
     {
         return response()->json([
             'status' => ApiStatus::UNAUTHORIZED->value,
