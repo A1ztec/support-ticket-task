@@ -44,7 +44,7 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket): bool
     {
-        return false;
+        return $user->role == UserRole::ADMIN || $user->id === $ticket->user_id;
     }
 
     /**
@@ -52,7 +52,7 @@ class TicketPolicy
      */
     public function restore(User $user, Ticket $ticket): bool
     {
-        return false;
+        return $user->role == UserRole::ADMIN ;
     }
 
     /**
@@ -60,7 +60,7 @@ class TicketPolicy
      */
     public function forceDelete(User $user, Ticket $ticket): bool
     {
-        return false;
+        return $user->role == UserRole::ADMIN;
     }
 
 
