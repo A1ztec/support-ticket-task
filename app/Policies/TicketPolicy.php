@@ -74,10 +74,7 @@ class TicketPolicy
 
     public function reply(User $user, Ticket $ticket): bool
     {
-
-        // dd($user->id , $ticket->user_id);
-        // return $user->role === UserRole::ADMIN || $user->id === $ticket->user_id;
-        return true;
+        return $user->role === UserRole::ADMIN || $user->id === $ticket->user_id;
     }
 
     public function canDownloadAttachment(User $user, Ticket $ticket): bool
