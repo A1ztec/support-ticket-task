@@ -77,4 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
         event(new UserRegistered($this, $this->verify_otp));
     }
+
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::ADMIN;
+    }
 }
