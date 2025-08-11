@@ -1,11 +1,13 @@
 <?php
 
 use App\Exceptions\Handler;
+use App\Http\Middleware\Admin;
 use App\Enums\System\ApiStatus;
 use App\Traits\ApiResponseTrait;
 use function Pest\Laravel\instance;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Application;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,7 +23,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->prepend(\App\Http\Middleware\ChangeLanguage::class);
+        $middleware->alias(['admin' => Admin::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $api = new class {
@@ -36,6 +39,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
                 if ($e instanceof NotFoundHttpException) {
                     return $api->errorResponse(__('Not found.'), ApiStatus::NOT_FOUND->httpCode());
+                }
+
+                if ($e instanceof AuthenticationException) {
+                    return $api->errorResponse(__('Unauthenticated.'), ApiStatus::UNAUTHORIZED->httpCode());
                 }
 
                 if ($e instanceof AuthorizationException) {
