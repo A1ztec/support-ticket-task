@@ -102,10 +102,11 @@ class TicketController extends Controller
         });
     }
 
-    public function downloadAttachment($ticketId)
+    public function downloadAttachment(Ticket $ticket)
     {
-        $user = Auth::user();
-        $ticket = $user->tickets()->findOrFail($ticketId);
+        if (!$ticket) {
+            return $this->notFoundResponse(__('Ticket not found.'));
+        }
 
         if (!$ticket->attachment) {
             return $this->notFoundResponse(__('No attachment found for this ticket.'));
