@@ -10,7 +10,7 @@ class Message extends Model
         'ticket_id',
         'user_id',
         'message',
-        'attachment',
+        
     ];
 
 
