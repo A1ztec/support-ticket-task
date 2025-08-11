@@ -37,13 +37,13 @@ class TicketController extends Controller
         );
     }
 
-    public function showTicket($id)
+    public function showTicket(Ticket $ticket)
     {
-        $user = Auth::user();
+        if (!$ticket) {
+            return $this->notFoundResponse(__('Ticket not found.'));
+        }
 
-        $ticket = $user->tickets()
-            ->with(['user', 'messages.user'])
-            ->findOrFail($id);
+        $ticket->load(['user', 'messages.user']);
 
         $this->authorize('view', $ticket);
 
@@ -126,6 +126,7 @@ class TicketController extends Controller
     public function reply(ReplyToTicketRequest $request)
     {
         $data = $request->validated();
+
         $ticket = Ticket::findOrFail($data['ticket_id']);
 
         $this->authorize('reply', $ticket);
