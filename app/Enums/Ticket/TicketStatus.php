@@ -12,7 +12,7 @@ enum TicketStatus: string
 
 
 
-public function title() : string
+    public function title(): string
     {
         return match ($this) {
             self::OPEN => __('Open'),
@@ -31,9 +31,8 @@ public function title() : string
     }
 
 
-    public function options() : array
+    public function options(): array
     {
         return collect(self::cases())->mapWithKeys(fn($item) => [$item->value => $item->title()])->toArray();
     }
-
 }
