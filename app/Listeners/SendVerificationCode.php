@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 
-class SendVerificationCode
+class SendVerificationCode implements ShouldQueue
 {
 
     use InteractsWithQueue;
