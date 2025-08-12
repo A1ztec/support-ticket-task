@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\DashboardController;
