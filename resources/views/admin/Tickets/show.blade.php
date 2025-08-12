@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-gray-100">
-    <!-- Header -->
+   
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -41,7 +41,7 @@
             </div>
         @endif
 
-        <!-- Error Messages -->
+
         @if($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
                 <ul>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <!-- Messages Thread -->
+
                 <div class="bg-white rounded-lg shadow">
                     <div class="p-6 border-b">
                         <h3 class="text-lg font-semibold text-gray-900">
@@ -190,7 +190,7 @@
                         <i class="fas fa-cogs mr-2"></i>Actions
                     </h3>
 
-                    <!-- Status Update Form -->
+
                     <form method="POST" action="{{ route('admin.tickets.update-status', $ticket) }}" class="mb-4">
                         @csrf
                         @method('PATCH')
@@ -210,7 +210,7 @@
                     </form>
 
 
-                <!-- Ticket Info -->
+
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">
                         <i class="fas fa-info-circle mr-2"></i>Ticket Information
@@ -243,7 +243,7 @@
     </main>
 
     <script>
-        // Auto-hide success/error messages
+
         setTimeout(function() {
             const alerts = document.querySelectorAll('.bg-green-100, .bg-red-100');
             alerts.forEach(alert => {

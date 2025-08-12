@@ -25,7 +25,7 @@
                 <p class="text-gray-600 mt-2">Sign in to access the dashboard</p>
             </div>
 
-            <!-- Error Messages -->
+           
             @if($errors->any())
                 <div class="mb-6">
                     <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
@@ -41,7 +41,7 @@
                 </div>
             @endif
 
-            <!-- Success Messages -->
+
             @if(session('success'))
                 <div class="mb-6">
                     <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
@@ -53,11 +53,11 @@
                 </div>
             @endif
 
-            <!-- Login Form -->
+
             <form method="POST" action="{{ route('admin.auth.login.post') }}" class="space-y-6" id="loginForm">
                 @csrf
 
-                <!-- Email Field -->
+
                 <div class="space-y-2">
                     <label for="email" class="block text-sm font-medium text-gray-700">
                         <i class="fas fa-envelope mr-1"></i>Email Address
@@ -77,7 +77,7 @@
                     @enderror
                 </div>
 
-                <!-- Password Field -->
+
                 <div class="space-y-2">
                     <label for="password" class="block text-sm font-medium text-gray-700">
                         <i class="fas fa-lock mr-1"></i>Password
@@ -96,7 +96,7 @@
                     @enderror
                 </div>
 
-                <!-- Remember Me -->
+
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <input type="checkbox" id="remember" name="remember"
@@ -107,7 +107,7 @@
                     </div>
                 </div>
 
-                <!-- Submit Button -->
+
                 <div class="space-y-4">
                     <button type="submit"
                         class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

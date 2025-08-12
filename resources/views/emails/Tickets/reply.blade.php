@@ -179,7 +179,7 @@
 
 <body>
     <div class="container">
-      
+
         <div class="header">
             <h1>🎫 Support Ticket Reply</h1>
             <p>We've responded to your support request</p>
@@ -191,7 +191,7 @@
 
             <p>Great news! We have replied to your support ticket. Here are the details:</p>
 
-            <!-- Ticket Information -->
+            
             <div class="ticket-info">
                 <h3>{{ $ticket->subject }}</h3>
 

@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-gray-100">
-    <!-- Header -->
+
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -34,17 +34,17 @@
     </header>
 
     <main class="max-w-7xl mx-auto py-6 px-4">
-        <!-- Success Messages -->
+
         @if(session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
                 <i class="fas fa-check-circle mr-2"></i>{{ session('success') }}
             </div>
         @endif
 
-        <!-- Filters -->
+
         <div class="bg-white p-6 rounded-lg shadow mb-6">
             <form method="GET" action="{{ route('admin.tickets.index') }}" class="flex flex-wrap gap-4 items-end">
-                <!-- Status Filter -->
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Status</label>
                     <select name="status" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -57,7 +57,7 @@
                     </select>
                 </div>
 
-                <!-- Filter Buttons -->
+
                 <div class="flex space-x-2">
                     <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200">
                         <i class="fas fa-filter mr-2"></i>Apply Filter
@@ -70,7 +70,7 @@
             </form>
         </div>
 
-        <!-- Status Summary Cards -->
+
         @if($tickets->total() > 0)
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -118,7 +118,7 @@
             </div>
         @endif
 
-        <!-- Tickets Table -->
+
         <div class="bg-white rounded-lg shadow">
             <div class="p-6 border-b">
                 <div class="flex justify-between items-center">
@@ -241,7 +241,7 @@
                     </table>
                 </div>
 
-                <!-- Pagination -->
+
                 @if($tickets->hasPages())
                     <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
                         <div class="flex items-center justify-between">
@@ -296,9 +296,7 @@
         </div>
     </main>
 
-    <script>
-        // Auto-hide success messages
-        setTimeout(function() {
+    <script>    setTimeout(function() {
             const successAlert = document.querySelector('.bg-green-100');
             if (successAlert) {
                 successAlert.style.transition = 'opacity 0.5s ease-out';

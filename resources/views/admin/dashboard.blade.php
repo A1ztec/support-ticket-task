@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-gray-100">
-    <!-- Simple Header -->
+    
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -30,11 +30,11 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+
     <main class="max-w-7xl mx-auto py-6 px-4">
-        <!-- Stats Cards -->
+
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <!-- Total Tickets -->
+
             <div class="bg-white p-6 rounded-lg shadow">
                 <div class="flex items-center">
                     <div class="p-2 bg-blue-100 rounded-lg">
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <!-- Open Tickets -->
+
             <div class="bg-white p-6 rounded-lg shadow">
                 <div class="flex items-center">
                     <div class="p-2 bg-orange-100 rounded-lg">
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <!-- In Progress -->
+
             <div class="bg-white p-6 rounded-lg shadow">
                 <div class="flex items-center">
                     <div class="p-2 bg-yellow-100 rounded-lg">
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <!-- Closed -->
+
             <div class="bg-white p-6 rounded-lg shadow">
                 <div class="flex items-center">
                     <div class="p-2 bg-green-100 rounded-lg">
@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        
+
         <div class="bg-white p-6 rounded-lg shadow mb-8">
             <h2 class="text-lg font-semibold mb-4">Quick Actions</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
