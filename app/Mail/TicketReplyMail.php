@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\Ticket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
@@ -40,13 +41,50 @@ class TicketReplyMail extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'emails.tickets.replay',
-            with: [
-                'ticket' => $this->ticket,
-                'message' => $this->ticket->messages->latest()->first(),
-            ]
-        );
+        try {
+
+            $latestMessage = $this->ticket->messages()->latest()->first();
+
+            Log::info('TicketReplyMail content', [
+                'ticket_id' => $this->ticket->id,
+                'has_latest_message' => !is_null($latestMessage)
+            ]);
+
+            return new Content(
+                view: 'emails.tickets.replay',
+                with: [
+                    'ticket' => $this->ticket,
+                    'latestMessage' => $latestMessage, // Fixed variable name
+                ]
+            );
+        } catch (\Exception $e) {
+            Log::error('Error in TicketReplyMail content', [
+                'ticket_id' => $this->ticket->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
+        }
+    }
+
+                'has_latest_message' => !is_null($latestMessage)
+            ]);
+
+            return new Content(
+                view: 'emails.tickets.replay',
+                with: [
+                    'ticket' => $this->ticket,
+                    'latestMessage' => $latestMessage, // Fixed variable name
+                ]
+            );
+        } catch (\Exception $e) {
+            Log::error('Error in TicketReplyMail content', [
+                'ticket_id' => $this->ticket->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
+        }
     }
 
     /**
