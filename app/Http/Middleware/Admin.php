@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Enums\User\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +17,14 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the user is authenticated and has admin privileges
-        if (!Auth::check() || !Auth::user()->isAdmin()) {
-            return response()->json(['message' => __('Unauthorized access')], 403);
+        if (!Auth::check()) {
+            return redirect()->route('admin.login');
+        }
+
+        if (Auth::user()->role !== UserRole::ADMIN) {
+            Auth::logout();
+            return redirect()->route('admin.login')
+                ->withErrors(['email' => 'You do not have permission to access the admin panel.']);
         }
 
         return $next($request);
