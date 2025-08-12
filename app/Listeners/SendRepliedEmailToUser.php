@@ -25,17 +25,46 @@ class SendRepliedEmailToUser implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(TicketReplied $event): void
-    {
-        $user = $event->ticket->user;
-        if ($user) {
-            try {
-                $user->notify(new TicketRepliedNotification($event->ticket));
-            } catch (\Exception $e) {
-                Log::error('Failed to send ticket reply notification: ' . $e->getMessage());
+   try {
+            Log::info('SendRepliedEmailToUser started', [
+                'ticket_id' => $event->ticket->id
+            ]);
+
+
+            $ticket = $event->ticket->load(['user', 'messages.user']);
+            $user = $ticket->user;
+
+            if (!$user) {
+                Log::warning('No user found for ticket', [
+                    'ticket_id' => $ticket->id
+                ]);
+                return;
             }
-        } else {
-            Log::warning('No user found for ticket ID: ' . $event->ticket->id);
+
+            if (!$user->email) {
+                Log::warning('User has no email', [
+                    'ticket_id' => $ticket->id,
+                    'user_id' => $user->id
+                ]);
+                return;
+            }
+
+            n
+            $user->notify(new TicketRepliedNotification($ticket));
+
+            Log::info('Ticket reply notification sent successfully', [
+                'ticket_id' => $ticket->id,
+                'user_id' => $user->id,
+                'user_email' => $user->email
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to send ticket reply notification', [
+                'ticket_id' => $event->ticket->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e; // Rethrow to retry
         }
     }
 }
