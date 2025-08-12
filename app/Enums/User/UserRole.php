@@ -21,7 +21,7 @@ enum UserRole: string
     }
 
 
-    public function options(): array
+    public static function options(): array
     {
         return collect(self::cases())->mapWithKeys(fn($item) => [$item->value => $item->title()])->toArray();
     }
