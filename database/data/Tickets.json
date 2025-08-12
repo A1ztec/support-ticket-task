@@ -5,7 +5,7 @@
             "user_id": 1,
             "subject": "Issue with login",
             "message": "I'm having trouble logging in.",
-            "status": "open",
+            "status": "open"
 
         },
         {
@@ -13,14 +13,14 @@
             "user_id": 1,
             "subject": "Payment not processing",
             "status": "open",
-            "message": "I'm having trouble with my payment.",
+            "message": "I'm having trouble with my payment."
         },
         {
             "id": 3,
             "user_id": 1,
             "subject": "UI glitch on dashboard",
             "status": "closed",
-            "message": "There's a glitch in the dashboard UI.",
+            "message": "There's a glitch in the dashboard UI."
         }
     ]
 }
