@@ -28,7 +28,7 @@ class TicketReplyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ticket Replay Mail',
+            subject: 'Reply To Your Support Ticket ' . $this->ticket->id,
         );
     }
 
@@ -41,6 +41,7 @@ class TicketReplyMail extends Mailable
             view: 'emails.tickets.replay',
             with: [
                 'ticket' => $this->ticket,
+                'message' => $this->ticket->messages->latest()->first(),
             ]
         );
     }
