@@ -12,6 +12,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendVerificationCode
 {
+
+    use InteractsWithQueue;
+
+    public $tries = 3;
+    public $backoff = [10, 30, 60];
     /**
      * Create the event listener.
      */
@@ -27,7 +32,7 @@ class SendVerificationCode
     {
         try {
 
-            Mail::to($event->user->email)->send(new VerificationCodeMail($event->verificationCode));
+            Mail::to($event->user->email)->queue(new VerificationCodeMail($event->verificationCode));
             Log::channel('email')->info('Sent verification code to: ' . $event->user->email);
         } catch (\Exception $e) {
             Log::error('Failed to send verification code: ' . $e->getMessage());
