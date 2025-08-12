@@ -16,8 +16,6 @@ class TicketReplyMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels, InteractsWithQueue;
 
-
-
     /**
      * Create a new message instance.
      */
@@ -42,7 +40,6 @@ class TicketReplyMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         try {
-
             $latestMessage = $this->ticket->messages()->latest()->first();
 
             Log::info('TicketReplyMail content', [
@@ -51,30 +48,10 @@ class TicketReplyMail extends Mailable implements ShouldQueue
             ]);
 
             return new Content(
-                view: 'emails.tickets.replay',
+                view: 'emails.tickets.reply',
                 with: [
                     'ticket' => $this->ticket,
-                    'latestMessage' => $latestMessage, // Fixed variable name
-                ]
-            );
-        } catch (\Exception $e) {
-            Log::error('Error in TicketReplyMail content', [
-                'ticket_id' => $this->ticket->id,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-            throw $e;
-        }
-    }
-
-                'has_latest_message' => !is_null($latestMessage)
-            ]);
-
-            return new Content(
-                view: 'emails.tickets.replay',
-                with: [
-                    'ticket' => $this->ticket,
-                    'latestMessage' => $latestMessage, // Fixed variable name
+                    'latestMessage' => $latestMessage,
                 ]
             );
         } catch (\Exception $e) {
