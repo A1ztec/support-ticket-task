@@ -16,8 +16,6 @@ class MessageSeeder extends Seeder
         $data = json_decode(file_get_contents(base_path('database/data/Messages.json')), true);
 
         foreach ($data['messages'] as $message) {
-            $message['created_at'] = now();
-            $message['updated_at'] = now();
             Message::create($message);
         }
     }
