@@ -25,7 +25,9 @@ class SendRepliedEmailToUser implements ShouldQueue
     /**
      * Handle the event.
      */
-   try {
+    public function handle(TicketReplied $event): void
+    {
+        try {
             Log::info('SendRepliedEmailToUser started', [
                 'ticket_id' => $event->ticket->id
             ]);
@@ -49,7 +51,7 @@ class SendRepliedEmailToUser implements ShouldQueue
                 return;
             }
 
-            n
+
             $user->notify(new TicketRepliedNotification($ticket));
 
             Log::info('Ticket reply notification sent successfully', [
@@ -67,4 +69,6 @@ class SendRepliedEmailToUser implements ShouldQueue
             throw $e; // Rethrow to retry
         }
     }
+
+
 }
