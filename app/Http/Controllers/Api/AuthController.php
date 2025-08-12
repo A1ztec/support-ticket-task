@@ -109,7 +109,6 @@ class AuthController extends Controller
                 $user->markEmailAsVerified();
                 $user->verify_otp = null;
                 $user->email_otp_expires_at = null;
-                // $user->status = UserStatus::ACTIVE;
                 $user->save();
 
                 return $this->successResponse(
@@ -139,10 +138,6 @@ class AuthController extends Controller
                 return $this->errorResponse(__('Invalid credentials'), 401);
             }
 
-
-            // if ($user->status !== UserStatus::ACTIVE) {
-            //     return $this->errorResponse(__('User account is not active'), 403);
-            // }
 
             if (!$user->hasVerifiedEmail()) {
                 return $this->errorResponse(message: __('Please verify your email address before logging in.'), code: 403);
