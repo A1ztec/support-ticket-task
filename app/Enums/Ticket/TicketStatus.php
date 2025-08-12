@@ -21,17 +21,10 @@ enum TicketStatus: string
         };
     }
 
-    public function color(): string
-    {
-        return match ($this) {
-            self::OPEN => 'blue',
-            self::IN_PROGRESS => 'yellow',
-            self::CLOSED => 'green',
-        };
-    }
 
 
-    public function options(): array
+
+    public static function options(): array
     {
         return collect(self::cases())->mapWithKeys(fn($item) => [$item->value => $item->title()])->toArray();
     }
