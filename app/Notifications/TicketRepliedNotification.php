@@ -3,15 +3,21 @@
 namespace App\Notifications;
 
 use App\Models\Ticket;
-use Illuminate\Bus\Queueable;
 use App\Mail\TicketReplyMail;
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class TicketRepliedNotification extends Notification implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, InteractsWithQueue;
+
+
+    public $tries = 3;
+    public $backoff = [10, 30, 60];
+    public $timeout = 120;
 
     /**
      * Create a new notification instance.
