@@ -33,4 +33,20 @@ class Ticket extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+
+    public function scopeInProgress($query)
+    {
+        return $query->where('status', TicketStatus::IN_PROGRESS);
+    }
+
+    public function scopeClosed($query)
+    {
+        return $query->where('status', TicketStatus::CLOSED);
+    }
+
+    public function scopeOpen($query)
+    {
+        return $query->where('status', TicketStatus::OPEN);
+    }
 }
