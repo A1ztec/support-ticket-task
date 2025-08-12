@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Notifications\TicketRepliedNotification;
 
-class SendRepliedEmailToUser
+class SendRepliedEmailToUser implements ShouldQueue
 {
     use InteractsWithQueue;
 
