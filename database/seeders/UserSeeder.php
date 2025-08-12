@@ -13,24 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = [
-            [
-                'name' => 'Admin User',
-                'email' => 'admin@example.com',
-                'password' => bcrypt('password'),
-                'role' => 'admin',
-                'email_verified_at' => now(),
-            ],
-            [
-                'name' => 'User',
-                'email' => 'user@example.com',
-                'password' => bcrypt('password'),
-                'role' => 'user',
-                'email_verified_at' => now(),
-            ],
-        ];
+        $data = json_decode(file_get_contents(base_path('database/data/Users.json')), true);
 
-        foreach ($users as $user) {
+        foreach ($data['users'] as $user) {
+            $user['password'] = bcrypt('password');
+            $user['email_verified_at'] = now();
             User::create($user);
         }
     }
