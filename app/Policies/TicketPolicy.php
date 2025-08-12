@@ -52,7 +52,7 @@ class TicketPolicy
      */
     public function restore(User $user, Ticket $ticket): bool
     {
-        return $user->role == UserRole::ADMIN ;
+        return $user->role == UserRole::ADMIN;
     }
 
     /**
@@ -65,7 +65,7 @@ class TicketPolicy
 
 
 
-    public function close(User $user, Ticket $ticket): bool
+    public function updateStatus(User $user, Ticket $ticket): bool
     {
 
         return $user->role === UserRole::ADMIN;
