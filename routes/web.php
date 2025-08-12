@@ -5,9 +5,9 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\DashboardController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('auth')->name('auth.')->group(function () {
