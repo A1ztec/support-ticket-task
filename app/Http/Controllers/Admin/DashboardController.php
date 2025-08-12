@@ -13,12 +13,12 @@ class DashboardController extends Controller
     {
         $stats = [
             'total_tickets' => Ticket::count(),
-            'open_tickets' => Ticket::where('status', TicketStatus::OPEN)->count(),
-            'in_progress_tickets' => Ticket::where('status', TicketStatus::IN_PROGRESS)->count(),
-            'closed_tickets' => Ticket::where('status', TicketStatus::CLOSED)
+            'open_tickets' => Ticket::open()->count(),
+            'in_progress_tickets' => Ticket::inProgress()->count(),
+            'closed_tickets' => Ticket::closed()
                 ->whereMonth('updated_at', now()->month)
                 ->count(),
-            'new_tickets' => Ticket::where('status', TicketStatus::OPEN)
+            'new_tickets' => Ticket::open()
                 ->whereDate('created_at', today())
                 ->count(),
         ];
@@ -29,24 +29,6 @@ class DashboardController extends Controller
             ->limit(10)
             ->get();
 
-
-        $chart_data = [
-            'daily_tickets' => $this->getDailyTicketCounts()
-        ];
-
-        return view('admin.dashboard', compact('stats', 'recent_tickets', 'chart_data'));
-    }
-
-    private function getDailyTicketCounts(): array
-    {
-        $counts = [];
-
-        for ($i = 6; $i >= 0; $i--) {
-            $date = now()->subDays($i)->toDateString();
-            $count = Ticket::whereDate('created_at', $date)->count();
-            $counts[] = $count;
-        }
-
-        return $counts;
+        return view('admin.dashboard', compact('stats', 'recent_tickets'));
     }
 }
