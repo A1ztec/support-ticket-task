@@ -60,6 +60,6 @@ class AuthController extends Controller
 
         Log::info("Admin logged out successfully", ['user_id' => $userId]);
 
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.auth.login');
     }
 }
