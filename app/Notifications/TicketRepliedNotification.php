@@ -42,7 +42,8 @@ class TicketRepliedNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): TicketReplyMail
     {
-        return new TicketReplyMail($this->ticket);
+        return (new TicketReplyMail($this->ticket))
+            ->to($notifiable->email);
     }
 
     /**
