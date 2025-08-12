@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Enums\User\UserRole;
 
 class UserObserver
 {
@@ -11,6 +12,9 @@ class UserObserver
      */
     public function created(User $user): void
     {
+        if ($user->role === UserRole::ADMIN) {
+            return;
+        }
         $user->generateAndSendVerificationCode();
     }
 
