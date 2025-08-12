@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class TicketRepliedNotification extends Notification
+class TicketRepliedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -34,7 +34,7 @@ class TicketRepliedNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable) : TicketReplyMail
+    public function toMail(object $notifiable): TicketReplyMail
     {
         return new TicketReplyMail($this->ticket);
     }
