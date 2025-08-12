@@ -10,6 +10,10 @@ use App\Notifications\TicketRepliedNotification;
 
 class SendRepliedEmailToUser
 {
+    use InteractsWithQueue;
+
+    public $tries = 3;
+    public $backoff = [10, 30, 60];
     /**
      * Create the event listener.
      */
@@ -33,6 +37,5 @@ class SendRepliedEmailToUser
         } else {
             Log::warning('No user found for ticket ID: ' . $event->ticket->id);
         }
-
     }
 }
