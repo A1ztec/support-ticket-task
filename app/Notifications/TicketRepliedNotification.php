@@ -34,12 +34,9 @@ class TicketRepliedNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail(object $notifiable) : TicketReplyMail
     {
-        return (new TicketReplyMail($this->ticket))
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+        return new TicketReplyMail($this->ticket);
     }
 
     /**
