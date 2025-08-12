@@ -17,8 +17,6 @@ class TicketSeeder extends Seeder
 
 
         foreach ($data['tickets'] as $ticket) {
-            $ticket['created_at'] = now();
-            $ticket['updated_at'] = now();
             Ticket::create($ticket);
         }
     }
