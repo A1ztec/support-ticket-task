@@ -1,0 +1,53 @@
+services:
+  web:
+    build: .
+    container_name: support_ticket_container
+    volumes:
+      - .:/var/www
+      - /var/www/vendor
+      - /var/www/node_modules
+    restart: unless-stopped
+    environment:
+      - "DB_HOST=db"
+      - "DB_PORT=3306"
+      - "DB_DATABASE=support_ticket_db"
+      - "DB_USERNAME=root"
+      - "DB_PASSWORD=root"
+    depends_on:
+      - db
+    networks:
+      - support_ticket_network
+  db:
+     image: mysql:5.7
+     container_name: support_ticket_db_container
+     restart: unless-stopped
+     environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: support_ticket_db
+     ports:
+       - "3307:3306"
+     volumes:
+       - support_ticket_db_data:/var/lib/mysql
+     networks:
+       - support_ticket_network
+  nginx:
+    image: nginx:alpine
+    container_name: support_ticket_nginx_container
+    restart: unless-stopped
+    ports:
+      - "8900:80"
+    volumes:
+      - .:/var/www
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    networks:
+        - support_ticket_network
+
+volumes:
+   support_ticket_db_data:
+networks:
+  support_ticket_network:
+    driver: bridge
+
+
