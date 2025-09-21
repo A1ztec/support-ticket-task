@@ -39,13 +39,14 @@ class TicketController extends Controller
 
     public function showTicket(Ticket $ticket)
     {
+        $this->authorize('view', $ticket);
+        
         if (!$ticket) {
             return $this->notFoundResponse(__('Ticket not found.'));
         }
 
         $ticket->load(['user', 'messages.user']);
 
-        $this->authorize('view', $ticket);
 
         return $this->successResponse(
             data: TicketResource::make($ticket),
@@ -112,7 +113,10 @@ class TicketController extends Controller
             return $this->notFoundResponse(__('No attachment found for this ticket.'));
         }
 
+
         $filePath = storage_path('app/public/' . $ticket->attachment);
+
+        //dd($filePath);
 
         if (!file_exists($filePath)) {
             return $this->notFoundResponse(__('Attachment file not found.'));
