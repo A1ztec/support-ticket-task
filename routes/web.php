@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Api\TicketController as ApiTicketController;
 use App\Http\Controllers\Admin\DashboardController;
 
 // Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/{ticket}/reply', 'reply')->name('reply');
             Route::patch('/{ticket}/status', 'updateStatus')->name('update-status');
             Route::patch('/{ticket}/close', 'close')->name('close');
+            Route::get('/{ticket}/download-attachment', [ApiTicketController::class, 'downloadAttachment'])->name('downloadAttachment');
         });
     });
 });
