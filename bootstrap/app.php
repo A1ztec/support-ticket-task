@@ -14,6 +14,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -45,7 +46,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     return $api->errorResponse(__('Unauthenticated.'), ApiStatus::UNAUTHORIZED->httpCode());
                 }
 
-                if ($e instanceof AuthorizationException) {
+                if ($e instanceof AuthorizationException || $e instanceof AccessDeniedHttpException) {
                     return $api->errorResponse(__('You are not authorized to perform this action.'), ApiStatus::UNAUTHORIZED->httpCode());
                 }
 
