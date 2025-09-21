@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-gray-100">
-   
+
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -93,11 +93,12 @@
                                     <div class="flex items-center">
                                         <i class="fas fa-paperclip text-gray-500 mr-2"></i>
                                         <span class="text-sm font-medium text-gray-700">Attachment:</span>
-                                        <a href="{{ asset('storage/' . $ticket->attachment) }}"
-                                           target="_blank"
-                                           class="ml-2 text-blue-600 hover:text-blue-800 text-sm">
-                                            View Attachment <i class="fas fa-external-link-alt ml-1"></i>
-                                        </a>
+                                        <form action="{{ route('admin.tickets.downloadAttachment', $ticket) }}" method="GET">
+                                            @csrf
+                                            <button type="submit" class="ml-2 text-blue-600 hover:text-blue-800 text-sm">
+                                                Download Attachment <i class="fas fa-download ml-1"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             @endif

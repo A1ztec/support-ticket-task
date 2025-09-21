@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\TicketController;
-use App\Http\Controllers\Api\TicketController as ApiTicketController;
 use App\Http\Controllers\Admin\DashboardController;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\Http\Controllers\Api\TicketController as ApiTicketController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -31,4 +32,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/{ticket}/download-attachment', [ApiTicketController::class, 'downloadAttachment'])->name('downloadAttachment');
         });
     });
+});
+
+Route::get('/sse-test', function () {
+    return view('sse');
+});
+
+Route::get('/sse', function () {
+    return response()->stream(function () {
+        while (true) {
+            echo "data: " . json_encode(['time' => now()->toDateTimeString()]) . "\n\n";
+            ob_flush();
+            flush();
+            sleep(2);
+        }
+    }, 200, [
+        'Content-Type' => 'text/event-stream',
+        'Cache-Control' => 'no-cache',
+        'Connection' => 'keep-alive',
+    ]);
 });
