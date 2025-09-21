@@ -23,6 +23,7 @@ class ReplyToTicketRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string', 'max:2048'],
+            'ticket_id' => ['required', 'integer', 'exists:tickets,id']
         ];
     }
 }
